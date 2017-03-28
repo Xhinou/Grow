@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sun : GameManager
+public class Sun : Event
 {
+
     void Start()
     {
 
@@ -14,9 +15,9 @@ public class Sun : GameManager
 
     }
 
-    void OnMouseDown()
+    /*void OnMouseDown()
     {
-        flower.Sun += 1;
-        StartCoroutine(Timer(gameObject, 5));
-    }
+        Flower.Sun += 1;
+        StartCoroutine(system.Timer(gameObject, 5));
+    }*/
 }
