@@ -5,19 +5,14 @@ using UnityEngine;
 public class Sun : Event
 {
 
-    void Start()
+    new void Start()
     {
-
+        base.Start();
     }
 
-    void Update()
+    private void OnMouseDown()
     {
-
-    }
-
-    /*void OnMouseDown()
-    {
-        Flower.Sun += 1;
+        flower.Feed(Flower.Need.Sun, +1);
         StartCoroutine(system.Timer(gameObject, 5));
-    }*/
+    }
 }

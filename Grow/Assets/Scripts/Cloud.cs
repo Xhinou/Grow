@@ -12,22 +12,16 @@ public class Cloud : Event
          get { return Flow; }
          set { Flow = value; }
      }*/
-    Flower flower;
-    GameManager system;
-    void Start()
+    //GameManager system;
+
+     new private void Start()
     {
-        system = GameObject.Find("System").GetComponent<GameManager>();
-        flower = GameObject.Find("Flower").GetComponent<Flower>();
+        base.Start();
     }
 
-    void Update()
+    private void OnMouseDown()
     {
-
-    }
-
-    void OnMouseDown()
-    {
-        flower.Feed(Water, 1);
+        flower.Feed(Flower.Need.Water, +1);
         StartCoroutine(system.Timer(gameObject, 5));
     }
 }

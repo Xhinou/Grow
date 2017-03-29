@@ -5,11 +5,11 @@ using UnityEngine;
 public class Flower : MonoBehaviour
 {
     //States
-    enum Age {Young, Adult, Ancient};
+    private enum Age {Young, Adult, Ancient};
     [SerializeField] private Age age;
 
-    public enum Need { Food, Sun, Water};
-    //public Need needs;
+    public enum Need {Food, Sun, Water};
+    private Need needs;
 
     //Stats
     [SerializeField] private int
@@ -17,10 +17,13 @@ public class Flower : MonoBehaviour
         baseSun,
         baseWater,
         res;
-    [SerializeField] private bool vegan;
+    [SerializeField] private bool
+        drunk,
+        shiny,
+        vegan;
 
     //Givens
-    private int
+    [SerializeField] private int
         food,
         sun,
         water;
@@ -43,7 +46,7 @@ public class Flower : MonoBehaviour
         }
     }
     
-    void OnMouseDown()
+    private void OnMouseDown()
     {
         /*
         Play Animation,
@@ -56,9 +59,9 @@ public class Flower : MonoBehaviour
     {
         res = 5;
         RandDice(5);
-        sun = rand;
+        baseSun = rand;
         RandDice(5);
-        water = rand;
+        baseWater = rand;
         RandDice(20);
         if (rand == 1)
         {
@@ -73,7 +76,7 @@ public class Flower : MonoBehaviour
         }
     }
 
-    //When the flower is growing up
+    //Called when the flower is growing up
     private void Evolve(Age flowerAge)
     {
         switch (flowerAge) {
@@ -92,6 +95,7 @@ public class Flower : MonoBehaviour
         }
     }
 
+    //Called to feed the Flower
     public void Feed(Need flowerNeed, int mod)
     {
         switch (flowerNeed)
@@ -111,21 +115,26 @@ public class Flower : MonoBehaviour
         }
     }
 
+    //Roll a dice and get the result
     private void RandDice(int dice)
     {
         rand = Random.Range(0, dice) + 1;
         Debug.Log(rand + "/" + dice);
     }
 
+    //Called to modify the Resistance of the Flower
     private void ModRes(int mod)
     {
         res += mod;
     }
 
     //Constructors
-    public int Food { get { return food; } set { food = value; } }
-    public int Res { get { return res; } set { res = value; } }
-    public int Sun { get { return sun; } set { sun = value; } }
-    public int Water { get { return water; } set { water = value; } }
-    public bool Vegan { get { return vegan; } set { vegan = value; } }
+    public int _baseFood { get { return baseFood; } set { baseFood = value; } } 
+    public int _baseSun { get { return baseSun; } set { baseSun = value; } }
+    public int _baseWater { get { return baseWater; } set { baseWater = value; } }
+    public bool _shiny { get { return shiny; } set { shiny = value; } }
+    public bool _vegan { get { return vegan; } set { vegan = value; } }
+    public int _food { get { return food; } set { food = value; } }
+    public int _sun { get { return sun; } set { sun = value; } }
+    public int _water { get { return water; } set { water = value; } }
 }

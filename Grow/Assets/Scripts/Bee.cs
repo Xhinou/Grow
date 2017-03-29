@@ -5,22 +5,16 @@ using UnityEngine;
 public class Bee : Event
 {
 
-    void Start()
+    new void Start()
     {
-
+        base.Start();
     }
 
-    void Update()
+    private void OnMouseDown()
     {
-
-    }
-
-   /* void OnMouseDown()
-    {
-        print(system.Population);
-        system.Population += 1;
+        system._population += 1;
         system.CheckPop();
         //Play Bee Animation
         //Destroy(gameObject);
-    }*/
+    }
 }

@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Event : MonoBehaviour
 {
-   // protected GameManager system;
-    private Flower flower;
+    protected GameManager system;
+    protected Flower flower;
+
+    private float delay;
 
     //public GameManager System { get; set; }
-    protected Flower Flower { get; set; }
+    //protected Flower Flower { get; set; }
 
-    private void Start()
+    protected void Start()
     {
-        //system = GameObject.Find("System").GetComponent<GameManager>();
+        system = gameObject.GetComponent<GameManager>();
+        flower = GameObject.Find("Flower").GetComponent<Flower>();
     }
 
     protected void OnMouseEnter()
