@@ -16,5 +16,6 @@ public class Bee : Event
         system.CheckPop();
         //Play Bee Animation
         //Destroy(gameObject);
+        print("Bee destroyed");
     }
 }

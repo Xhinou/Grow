@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Flower : MonoBehaviour
 {
-    //States
+    //Enums
     private enum Age {Young, Adult, Ancient};
     [SerializeField] private Age age;
 
-    public enum Need {Food, Sun, Water};
+    public enum Need { Food, Sun, Water };
     private Need needs;
 
     //Stats
@@ -128,7 +128,7 @@ public class Flower : MonoBehaviour
         res += mod;
     }
 
-    //Constructors
+    //Properties
     public int _baseFood { get { return baseFood; } set { baseFood = value; } } 
     public int _baseSun { get { return baseSun; } set { baseSun = value; } }
     public int _baseWater { get { return baseWater; } set { baseWater = value; } }

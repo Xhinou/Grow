@@ -9,12 +9,9 @@ public class Event : MonoBehaviour
 
     private float delay;
 
-    //public GameManager System { get; set; }
-    //protected Flower Flower { get; set; }
-
     protected void Start()
     {
-        system = gameObject.GetComponent<GameManager>();
+        system = GameObject.Find("System").GetComponent<GameManager>();
         flower = GameObject.Find("Flower").GetComponent<Flower>();
     }
 

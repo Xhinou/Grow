@@ -4,17 +4,8 @@ using UnityEngine;
 
 public class Cloud : Event
 {
-    /*private GameManager system;
-     private Flower flower;
 
-     public Flower Flow
-     {
-         get { return Flow; }
-         set { Flow = value; }
-     }*/
-    //GameManager system;
-
-     new private void Start()
+    new void Start()
     {
         base.Start();
     }

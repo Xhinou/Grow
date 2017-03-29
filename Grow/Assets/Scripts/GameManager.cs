@@ -26,11 +26,14 @@ public class GameManager : MonoBehaviour
         //Play Day change Animation
         FoodMaths();
         CheckStates();
+        flower._sun = 0;
+        flower._water = 0;
     }
 
     //Calculations to compare Givens to (needed) Stats
     private void FoodMaths()
     {
+        //Check the given Water
         if (flower._water == flower._baseWater)
         {
             shinyInc += 1;
@@ -41,7 +44,20 @@ public class GameManager : MonoBehaviour
         }
         else if (flower._water > flower._baseWater)
         {
-            
+            int muchWater = flower._baseWater - flower._water;
+        }
+        //Check the given Sun
+        if (flower._sun == flower._baseSun)
+        {
+            shinyInc += 1;
+        }
+        else if (flower._sun < flower._baseSun)
+        {
+            shinyInc -= 1;
+        }
+        else if (flower._sun > flower._baseSun)
+        {
+
         }
     }
 
@@ -75,6 +91,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //Constructors
+    //Properties
     public int _population { get { return population; } set { population = value; } }
 }
