@@ -12,8 +12,7 @@ public class Bee : Event
 
     private void OnMouseDown()
     {
-        system._population += 1;
-        system.CheckPop();
+        system.Populate();
         //Play Bee Animation
         //Destroy(gameObject);
         print("Bee destroyed");

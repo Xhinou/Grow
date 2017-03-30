@@ -16,6 +16,7 @@ public class Flower : MonoBehaviour
         baseFood,
         baseSun,
         baseWater,
+        baseRes,
         res;
     [SerializeField] private bool
         drunk,
@@ -57,7 +58,7 @@ public class Flower : MonoBehaviour
     //Setting default stats
     private void DefaultStats(Age flowerAge)
     {
-        res = 5;
+        baseRes = 5;
         RandDice(5);
         baseSun = rand;
         RandDice(5);
@@ -115,6 +116,11 @@ public class Flower : MonoBehaviour
         }
     }
 
+    public void CheckGivens()
+    {
+
+    }
+
     //Roll a dice and get the result
     private void RandDice(int dice)
     {
@@ -125,13 +131,15 @@ public class Flower : MonoBehaviour
     //Called to modify the Resistance of the Flower
     private void ModRes(int mod)
     {
-        res += mod;
+        baseRes += mod;
     }
 
     //Properties
     public int _baseFood { get { return baseFood; } set { baseFood = value; } } 
     public int _baseSun { get { return baseSun; } set { baseSun = value; } }
     public int _baseWater { get { return baseWater; } set { baseWater = value; } }
+    public int _baseRes { get { return baseRes; } set { baseRes = value; } }
+    public int _res { get { return res; } set { res = value; } }
     public bool _shiny { get { return shiny; } set { shiny = value; } }
     public bool _vegan { get { return vegan; } set { vegan = value; } }
     public int _food { get { return food; } set { food = value; } }

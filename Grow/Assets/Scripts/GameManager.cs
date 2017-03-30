@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
         day,
         life,
         population,
-        shinyInc;
+        incDrunk,
+        incShiny;
 
     private void Start()
     {
@@ -36,11 +37,11 @@ public class GameManager : MonoBehaviour
         //Check the given Water
         if (flower._water == flower._baseWater)
         {
-            shinyInc += 1;
+            flower._res += 1;
         }
         else if (flower._water < flower._baseWater)
         {
-            shinyInc -= 1;
+            incShiny -= 1;
         }
         else if (flower._water > flower._baseWater)
         {
@@ -49,11 +50,11 @@ public class GameManager : MonoBehaviour
         //Check the given Sun
         if (flower._sun == flower._baseSun)
         {
-            shinyInc += 1;
+            incShiny += 1;
         }
         else if (flower._sun < flower._baseSun)
         {
-            shinyInc -= 1;
+            incShiny -= 1;
         }
         else if (flower._sun > flower._baseSun)
         {
@@ -72,8 +73,9 @@ public class GameManager : MonoBehaviour
     }
 
     //Check if Population increment Life;
-    public void CheckPop()
+    public void Populate()
     {
+        population += 1;
         if (population >= 10)
         {
             life += 1;
@@ -84,10 +86,10 @@ public class GameManager : MonoBehaviour
     //Check if the Flower get a new State
     private void CheckStates()
     {
-        if (shinyInc >= 3)
+        if (incShiny >= 3)
         {
             flower._shiny = true;
-            shinyInc = 0;
+            incShiny = 0;
         }
     }
 
