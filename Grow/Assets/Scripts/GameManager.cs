@@ -10,7 +10,10 @@ public class GameManager : MonoBehaviour
         life,
         population,
         incDrunk,
-        incShiny;
+        incDry,
+        incShiny,
+        modRes,
+        muchWater;
 
     private void Start()
     {
@@ -27,8 +30,8 @@ public class GameManager : MonoBehaviour
         //Play Day change Animation
         FoodMaths();
         CheckStates();
-        flower._sun = 0;
-        flower._water = 0;
+        SetNewDay();
+        FlowerDeath();
     }
 
     //Calculations to compare Givens to (needed) Stats
@@ -37,28 +40,35 @@ public class GameManager : MonoBehaviour
         //Check the given Water
         if (flower._water == flower._baseWater)
         {
-            flower._res += 1;
+            modRes += 1;
         }
         else if (flower._water < flower._baseWater)
         {
-            incShiny -= 1;
+            modRes -= 1;
+            if (!flower._dry)
+                incDry += 1;
         }
         else if (flower._water > flower._baseWater)
         {
-            int muchWater = flower._baseWater - flower._water;
+            muchWater = flower._water - flower._baseWater;
+            if (!flower._drunk)
+            incDrunk += 1;
         }
         //Check the given Sun
         if (flower._sun == flower._baseSun)
         {
-            incShiny += 1;
+            modRes += 1;
+            if (!flower._shiny)
+                incShiny += 1;
         }
         else if (flower._sun < flower._baseSun)
         {
-            incShiny -= 1;
+            flower._dirty = true;
+            modRes -= 1;
         }
-        else if (flower._sun > flower._baseSun)
+        else if (flower._sun >= 2 * flower._baseSun)
         {
-
+            //Flower is dead
         }
     }
 
@@ -89,7 +99,39 @@ public class GameManager : MonoBehaviour
         if (incShiny >= 3)
         {
             flower._shiny = true;
+            flower._res += 1;
             incShiny = 0;
+        }
+        if (incDrunk >= 3)
+        {
+            flower._drunk = true;
+            flower._res -= 1;
+            incDrunk = 0;
+        }
+        if (incDry >= 3)
+        {
+            flower._dry = true;
+            flower._res -= 1;
+            incDry = 0;
+        }
+    }
+
+    private void SetNewDay()
+    {
+        flower._res = flower._baseRes + modRes;
+        flower._sun = 0;
+        flower._water = muchWater;
+    }
+
+    private void FlowerDeath()
+    {
+        int rand = Random.Range(0, 10) + 1;
+        if (flower._res <= rand)
+        {
+            //Flower is alive
+        } else
+        {
+            //Flower is dead
         }
     }
 
