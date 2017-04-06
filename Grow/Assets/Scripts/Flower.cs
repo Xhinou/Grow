@@ -43,10 +43,15 @@ public class Flower : MonoBehaviour
         incShiny,
         modRes,
         _newRes,
-        muchWater;
+        _muchWater;
+
+    GameManager system;
 
     private void Start()
     {
+        // Set the classes
+        system = GameObject.Find("System").GetComponent<GameManager>();
+
         // Initialize default flower
         age = Age.Young;
         health = Health.Neutral;
@@ -103,30 +108,6 @@ public class Flower : MonoBehaviour
         {
             Debug.Log("Can't grow up anymore !");
         }
-        /*
-        switch (flowerAge)
-        {
-            case Age.Young:
-                baseRes += 1;
-                baseSun += RandDice(2);
-                baseWater += RandDice(2);
-                if (!vegan)
-                    baseFood += 1;
-                age += 1;
-                break;
-            case Age.Adult:
-                baseRes += 1;
-                baseSun += RandDice(2);
-                age += 1;
-                break;
-            case Age.Ancient:
-                Debug.Log("Can't grow up anymore !");
-                break;
-            default:
-                Debug.Log("Evolve : Age value error");
-                break;
-        }
-        */
     }
 
     // Called to feed the Flower
@@ -173,7 +154,7 @@ public class Flower : MonoBehaviour
         }
         else if (givenWater > baseWater)
         {
-            muchWater = givenWater - baseWater;
+            _muchWater = givenWater - baseWater;
             if (!drunk)
                 incDrunk += 1;
         }
@@ -186,10 +167,12 @@ public class Flower : MonoBehaviour
         }
         else if (givenSun < baseSun)
         {
-            dirty = true;
-            res -= 1;
+            if (age == Age.Ancient)
+                res -= 2;
+            else
+                res -= 1;
         }
-        else if (givenSun >= 5 * baseSun)
+        else if (givenSun >= baseSun + 5)
         {
             //Flower is dead
         }
@@ -238,15 +221,16 @@ public class Flower : MonoBehaviour
         return newRes;
     }
 
-    public void Death()
+    // Check if the Flower is still alive
+    public void Survive()
     {
-        int rand = Random.Range(0, 10) + 1;
-        if (res <= rand)
+        if (res <= randDice(10))
         {
             //Flower is alive
         }
         else
         {
+            if (life)
             //Flower is dead
         }
     }
@@ -266,6 +250,7 @@ public class Flower : MonoBehaviour
     public int baseRes { get { return _baseRes; } set { _baseRes = value; } }
     public int res { get { return _res; } set { _res = value; } }
     public int newRes { get { return _newRes; } set { _newRes = value; } }
+    public int muchWater { get { return _muchWater; } set { _muchWater = value; } }
     public bool dirty { get { return _dirty; } set { _dirty = value; } }
     public bool dead { get { return _dead; } set { _dead = value; } }
     public bool drunk { get { return _drunk; } set { _drunk = value; } }

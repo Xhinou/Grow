@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         day += 1;
         //Play Day change Animation
         flower.FoodMaths();
-        flower.Death();
+        flower.Survive();
         SetNewDay();
     }
 
@@ -52,14 +52,15 @@ public class GameManager : MonoBehaviour
             population = 0;
         }
     }
-
+    
     private void SetNewDay()
     {
-        flower.res = flower.baseRes + modRes;
+        flower.res = flower.baseRes;
         flower.givenSun = 0;
         flower.givenWater = flower.muchWater;
+        if (!flower.vegan)
+            flower.givenMeat = 0;
     }
-
 
     //Properties
     public int _population { get { return population; } set { population = value; } }
