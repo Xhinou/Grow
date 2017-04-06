@@ -23,6 +23,7 @@ public class Flower : MonoBehaviour
 
     [SerializeField] private bool
         _dirty,
+        _dead,
         _drunk,
         _dry,
         _shiny,
@@ -73,12 +74,12 @@ public class Flower : MonoBehaviour
     private void DefaultStats()
     {
         baseRes = 5;
-        baseSun = RandDice(3);
-        baseWater = RandDice(3);
-        if (RandDice(20) == 1)
+        baseSun = randDice(3);
+        baseWater = randDice(3);
+        if (randDice(20) == 1)
         {
             vegan = false;
-            baseMeat = RandDice(3);
+            baseMeat = randDice(3);
         }
         else
         {
@@ -93,11 +94,14 @@ public class Flower : MonoBehaviour
         if (age != Age.Ancient)
         {
             baseRes += 1;
-            baseSun += RandDice(2);
-            baseWater += RandDice(2);
+            baseSun += randDice(2);
+            baseWater += randDice(2);
             if (!vegan)
                 baseMeat += 1;
             age += 1;
+        } else
+        {
+            Debug.Log("Can't grow up anymore !");
         }
         /*
         switch (flowerAge)
@@ -145,17 +149,25 @@ public class Flower : MonoBehaviour
         }
     }
 
-    //Calculations to compare Givens to (needed) Stats
-    public void CheckGivens()
+    // All calculations to determine the resistance of the Flower
+    public void FoodMaths()
     {
-        //Check the given Water
+        CheckGivens();
+        CheckIncrement();
+        CheckStates();
+    }
+
+    // Calculations to compare Givens to (needed) Stats
+    private void CheckGivens()
+    {
+        // Check the given Water
         if (givenWater == baseWater)
         {
-            res = ModRes(+1);
+            res += 1;
         }
         else if (givenWater < baseWater)
         {
-            res = ModRes(-1);
+            res -= 1;
             if (!dry)
                 incDry += 1;
         }
@@ -165,17 +177,17 @@ public class Flower : MonoBehaviour
             if (!drunk)
                 incDrunk += 1;
         }
-        //Check the given Sun
+        // Check the given Sun
         if (givenSun == baseSun)
         {
-            res = ModRes(+1);
+            res += 1;
             if (!shiny)
                 incShiny += 1;
         }
         else if (givenSun < baseSun)
         {
             dirty = true;
-            res = ModRes(-1);
+            res -= 1;
         }
         else if (givenSun >= 5 * baseSun)
         {
@@ -183,32 +195,46 @@ public class Flower : MonoBehaviour
         }
     }
 
-    //Check if the Flower get a new State
-    public void CheckStates()
+    // Check if the Flower get a new State
+    private void CheckIncrement()
     {
         if (incShiny >= 3)
         {
             shiny = true;
-            res += 1;
             incShiny = 0;
         }
         if (incDrunk >= 3)
         {
             drunk = true;
-            res -= 1;
             incDrunk = 0;
         }
         if (incDry >= 3)
         {
             dry = true;
-            res -= 1;
             incDry = 0;
+        }
+    }
+
+    // Get the new resistance of the Flower
+    private void CheckStates()
+    {
+        if (shiny)
+        {
+            res += 1;
+        }
+        if (drunk)
+        {
+            res -= 1;
+        }
+        if (dry)
+        {
+            res -= 1;
         }
     }
 
     private int ModRes(int mod)
     {
-        int newRes = res + mod;
+        newRes = res + mod;
         return newRes;
     }
 
@@ -225,8 +251,8 @@ public class Flower : MonoBehaviour
         }
     }
 
-    // Roll a dice and get the result
-    private int RandDice(int dice)
+    // Roll a dice and return the result
+    private int randDice(int dice)
     {
         int rand = Random.Range(0, dice) + 1;
         Debug.Log(rand + "/" + dice);
@@ -241,6 +267,7 @@ public class Flower : MonoBehaviour
     public int res { get { return _res; } set { _res = value; } }
     public int newRes { get { return _newRes; } set { _newRes = value; } }
     public bool dirty { get { return _dirty; } set { _dirty = value; } }
+    public bool dead { get { return _dead; } set { _dead = value; } }
     public bool drunk { get { return _drunk; } set { _drunk = value; } }
     public bool dry { get { return _dry; } set { _dry = value; } }
     public bool shiny { get { return _shiny; } set { _shiny = value; } }

@@ -17,19 +17,22 @@ public class GameManager : MonoBehaviour
         population = 0;
         life = 0;
     }
-
-    //Called when the Next Day button is pressed
+    bool test(int A)
+    {
+        int B = 0;
+        return A == B;
+    }
+    // Called when the Next Day button is pressed
     public void NextDay()
     {
         day += 1;
         //Play Day change Animation
-        flower.CheckGivens();
-        flower.CheckStates();
-        SetNewDay();
+        flower.FoodMaths();
         flower.Death();
+        SetNewDay();
     }
 
-    //Timer to avoid events spam
+    // Timer to avoid events spam
     public IEnumerator Timer(GameObject obj, float seconds)
     {
         obj.GetComponent<BoxCollider2D>().enabled = false;
@@ -39,7 +42,7 @@ public class GameManager : MonoBehaviour
         obj.GetComponent<BoxCollider2D>().enabled = true;
     }
 
-    //Check if Population increment Life;
+    // Check if Population increment Life;
     public void Populate()
     {
         population += 1;
