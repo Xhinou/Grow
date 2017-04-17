@@ -12,7 +12,7 @@ public class Flower : MonoBehaviour
     private Need needs;
 
     private enum Health { Dying, Rotted, Bad, Neutral, Good, Excellent, Perfect };
-    private Health health;
+    [SerializeField] private Health health;
 
     // Stats
     [SerializeField] private int
@@ -27,7 +27,11 @@ public class Flower : MonoBehaviour
         _drunk,
         _dry,
         _shiny,
-        _vegan;
+        _vegan,
+        isDrunk = false,
+        isDry = false,
+        isShiny = false,
+        maxHealth = false;
 
     // Givens
     [SerializeField] private int
@@ -38,10 +42,9 @@ public class Flower : MonoBehaviour
     // Others variables
     private int
         _res,
-        incDrunk,
-        incDry,
-        incShiny,
-        modRes,
+        incDrunk = 0,
+        incDry = 0,
+        incShiny = 0,
         _newRes,
         _muchWater;
 
@@ -183,17 +186,17 @@ public class Flower : MonoBehaviour
     {
         if (incShiny >= 3)
         {
-            shiny = true;
+            isShiny = true;
             incShiny = 0;
         }
         if (incDrunk >= 3)
         {
-            drunk = true;
+            isDrunk = true;
             incDrunk = 0;
         }
         if (incDry >= 3)
         {
-            dry = true;
+            isDry = true;
             incDry = 0;
         }
     }
@@ -201,16 +204,22 @@ public class Flower : MonoBehaviour
     // Get the new resistance of the Flower
     private void CheckStates()
     {
-        if (shiny)
+        if (isShiny)
         {
+            shiny = true;
+            isShiny = false;
             res += 1;
         }
-        if (drunk)
+        if (isDrunk)
         {
+            drunk = true;
+            isDrunk = false;
             res -= 1;
         }
-        if (dry)
+        if (isDry)
         {
+            dry = true;
+            isDry = false;
             res -= 1;
         }
     }
@@ -221,16 +230,75 @@ public class Flower : MonoBehaviour
         return newRes;
     }
 
-    // Check if the Flower is still alive
-    public void Survive()
+    public void CheckHealth()
     {
         if (res <= randDice(10))
         {
+            health += 1;
+            switch (age)
+            {
+                case Age.Young:
+                    if (health == Health.Good)
+                    {
+                        maxHealth = true;
+                    }
+                    break;
+                case Age.Adult:
+                    if (health == Health.Excellent)
+                    {
+                        maxHealth = true;
+                    }
+                    break;
+                case Age.Ancient:
+                    if (health == Health.Perfect)
+                    {
+                        maxHealth = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            health -= 1;
+            switch (age)
+            {
+                case Age.Young:
+                    if (health == Health.Bad)
+                    {
+                        maxHealth = true;
+                    }
+                    break;
+                case Age.Adult:
+                    if (health == Health.Rotted)
+                    {
+                        maxHealth = true;
+                    }
+                    break;
+                case Age.Ancient:
+                    if (health == Health.Dying)
+                    {
+                        maxHealth = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    // Check if the Flower is still alive
+    private void Survive()
+    {
+        if (res <= randDice(10))
+        {
+            Debug.Log("The Flower is still alive");
             //Flower is alive
         }
         else
         {
-            if (life)
+            Debug.Log("The Flower did not make it");
             //Flower is dead
         }
     }
@@ -239,6 +307,8 @@ public class Flower : MonoBehaviour
     private int randDice(int dice)
     {
         int rand = Random.Range(0, dice) + 1;
+        if (rand > dice)
+            rand = dice;
         Debug.Log(rand + "/" + dice);
         return rand;
     }

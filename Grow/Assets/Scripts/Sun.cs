@@ -15,11 +15,11 @@ public class Sun : Event
     private void OnMouseDown()
     {
         flower.Feed(Flower.Need.Sun, +1);
-        SteamOut();
-        StartCoroutine(system.Timer(gameObject, 5));
+        Sweat();
+        //StartCoroutine(system.Timer(gameObject, 5));
     }
 
-    private void SteamOut()
+    private void Sweat()
     {
         incGiven += 1;
         if (incGiven >= 2)

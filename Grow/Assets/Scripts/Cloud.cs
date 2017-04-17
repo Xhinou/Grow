@@ -13,6 +13,6 @@ public class Cloud : Event
     private void OnMouseDown()
     {
         flower.Feed(Flower.Need.Water, +1);
-        StartCoroutine(system.Timer(gameObject, 5));
+        //StartCoroutine(system.Timer(gameObject, 5));
     }
 }

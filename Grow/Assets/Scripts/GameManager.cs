@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
         day = 1;
         population = 0;
         life = 0;
+        flower.res = flower.baseRes;
+        Debug.Log(test(0));
     }
     bool test(int A)
     {
@@ -28,7 +30,7 @@ public class GameManager : MonoBehaviour
         day += 1;
         //Play Day change Animation
         flower.FoodMaths();
-        flower.Survive();
+        flower.CheckHealth();
         SetNewDay();
     }
 
