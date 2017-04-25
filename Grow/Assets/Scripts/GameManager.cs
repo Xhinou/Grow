@@ -17,20 +17,14 @@ public class GameManager : MonoBehaviour
         population = 0;
         life = 0;
         flower.res = flower.baseRes;
-        Debug.Log(test(0));
     }
-    bool test(int A)
-    {
-        int B = 0;
-        return A == B;
-    }
+
     // Called when the Next Day button is pressed
     public void NextDay()
     {
         day += 1;
         //Play Day change Animation
-        flower.FoodMaths();
-        flower.CheckHealth();
+        flower.flowerMaths();
         SetNewDay();
     }
 

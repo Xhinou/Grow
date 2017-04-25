@@ -8,11 +8,15 @@ public class Flower : MonoBehaviour
     private enum Age { Young, Adult, Ancient };
     [SerializeField] private Age age;
 
+    private enum Health { Dying = -3, Rotted = -2, Bad = -1, Neutral = 0, Good = 1, Excellent = 2, Perfect = 3 };
+    [SerializeField] private Health health;
+
     public enum Need { Meat, Sun, Water };
     private Need needs;
 
-    private enum Health { Dying, Rotted, Bad, Neutral, Good, Excellent, Perfect };
-    [SerializeField] private Health health;
+    // All calculations to determine the resistance of the Flower
+    public delegate void FlowerMaths();
+    public FlowerMaths flowerMaths;
 
     // Stats
     [SerializeField] private int
@@ -27,11 +31,7 @@ public class Flower : MonoBehaviour
         _drunk,
         _dry,
         _shiny,
-        _vegan,
-        isDrunk = false,
-        isDry = false,
-        isShiny = false,
-        maxHealth = false;
+        _vegan;
 
     // Givens
     [SerializeField] private int
@@ -40,33 +40,33 @@ public class Flower : MonoBehaviour
         _givenWater;
 
     // Others variables
+    [SerializeField]
     private int
         _res,
         incDrunk = 0,
         incDry = 0,
         incShiny = 0,
+        decDrunk,
         _newRes,
-        _muchWater;
-
-    GameManager system;
+        _muchWater,
+        healthState = 0, // Health states : -1 = Minimal; 0 = Neutral; 1 = Maximal (health)
+        survivance = 0; // Day passed in a non-zero health state : -3 = Death; 3 = Evolve;
 
     private void Start()
     {
-        // Set the classes
-        system = GameObject.Find("System").GetComponent<GameManager>();
-
+        AddDelegates();
         // Initialize default flower
         age = Age.Young;
         health = Health.Neutral;
         res = baseRes;
-        DefaultStats();
+        DefaultStats(age);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            DefaultStats();
+            DefaultStats(age);
         }
     }
 
@@ -79,38 +79,49 @@ public class Flower : MonoBehaviour
     }
 
     // Setting default stats
-    private void DefaultStats()
+    private void DefaultStats(Age flowerAge)
     {
-        baseRes = 5;
-        baseSun = randDice(3);
-        baseWater = randDice(3);
-        if (randDice(20) == 1)
+        if (flowerAge == Age.Young)
         {
-            vegan = false;
-            baseMeat = randDice(3);
+            baseRes = 5;
+            baseSun = randDice(3);
+            baseWater = randDice(3);
+            if (randDice(20) == 1)
+            {
+                vegan = false;
+                baseMeat = randDice(3);
+            }
+            else
+            {
+                vegan = true;
+                baseMeat = 0;
+            }
         }
         else
         {
-            vegan = true;
-            baseMeat = 0;
-        }
-    }
-
-    // Called when the flower is growing up
-    private void Evolve()//Age flowerAge)
-    {
-        if (age != Age.Ancient)
-        {
+            DefaultStats(age - 1);
             baseRes += 1;
             baseSun += randDice(2);
             baseWater += randDice(2);
             if (!vegan)
                 baseMeat += 1;
-            age += 1;
-        } else
+        }
+    }
+
+    // Called when the flower is growing up
+    private void Evolve()
+    {
+        if (age == Age.Ancient)
         {
             Debug.Log("Can't grow up anymore !");
+            return;
         }
+        baseRes += 1;
+        baseSun += randDice(2);
+        baseWater += randDice(2);
+        if (!vegan)
+            baseMeat += 1;
+        age += 1;
     }
 
     // Called to feed the Flower
@@ -133,12 +144,14 @@ public class Flower : MonoBehaviour
         }
     }
 
-    // All calculations to determine the resistance of the Flower
-    public void FoodMaths()
+    // Add methods to delegate methods
+    private void AddDelegates()
     {
-        CheckGivens();
-        CheckIncrement();
-        CheckStates();
+        flowerMaths += CheckGivens;
+        flowerMaths += CheckIncrement;
+        flowerMaths += CheckStates;
+        flowerMaths += CheckHealth;
+        flowerMaths += Survive;
     }
 
     // Calculations to compare Givens to (needed) Stats
@@ -148,6 +161,8 @@ public class Flower : MonoBehaviour
         if (givenWater == baseWater)
         {
             res += 1;
+            if (dry)
+                dry = false;
         }
         else if (givenWater < baseWater)
         {
@@ -157,9 +172,11 @@ public class Flower : MonoBehaviour
         }
         else if (givenWater > baseWater)
         {
-            _muchWater = givenWater - baseWater;
+            muchWater = givenWater - baseWater;
             if (!drunk)
                 incDrunk += 1;
+            if (dry)
+                dry = false;
         }
         // Check the given Sun
         if (givenSun == baseSun)
@@ -174,10 +191,17 @@ public class Flower : MonoBehaviour
                 res -= 2;
             else
                 res -= 1;
+            if (shiny)
+                shiny = false;
         }
         else if (givenSun >= baseSun + 5)
         {
             //Flower is dead
+        }
+        else
+        {
+            if (shiny)
+                shiny = false;
         }
     }
 
@@ -186,17 +210,17 @@ public class Flower : MonoBehaviour
     {
         if (incShiny >= 3)
         {
-            isShiny = true;
+            shiny = true;
             incShiny = 0;
         }
         if (incDrunk >= 3)
         {
-            isDrunk = true;
+            drunk = true;
             incDrunk = 0;
         }
         if (incDry >= 3)
         {
-            isDry = true;
+            dry = true;
             incDry = 0;
         }
     }
@@ -204,24 +228,14 @@ public class Flower : MonoBehaviour
     // Get the new resistance of the Flower
     private void CheckStates()
     {
-        if (isShiny)
-        {
-            shiny = true;
-            isShiny = false;
+        if (shiny)
             res += 1;
-        }
-        if (isDrunk)
-        {
-            drunk = true;
-            isDrunk = false;
+        if (muchWater == 0)
+            drunk = false;
+        if (drunk)
             res -= 1;
-        }
-        if (isDry)
-        {
-            dry = true;
-            isDry = false;
+        if (dry)
             res -= 1;
-        }
     }
 
     private int ModRes(int mod)
@@ -230,77 +244,72 @@ public class Flower : MonoBehaviour
         return newRes;
     }
 
-    public void CheckHealth()
+    // Check the Health of the Flower
+    private void CheckHealth()
     {
-        if (res <= randDice(10))
+        if (res >= randDice(10))
         {
-            health += 1;
-            switch (age)
+            print("wut");
+            if (healthState != 1)
             {
-                case Age.Young:
-                    if (health == Health.Good)
-                    {
-                        maxHealth = true;
-                    }
-                    break;
-                case Age.Adult:
-                    if (health == Health.Excellent)
-                    {
-                        maxHealth = true;
-                    }
-                    break;
-                case Age.Ancient:
-                    if (health == Health.Perfect)
-                    {
-                        maxHealth = true;
-                    }
-                    break;
-                default:
-                    break;
+                health += 1;
+                survivance = 0;
             }
+            else
+                survivance += 1;
         }
         else
         {
-            health -= 1;
-            switch (age)
+            if (healthState != -1)
             {
-                case Age.Young:
-                    if (health == Health.Bad)
-                    {
-                        maxHealth = true;
-                    }
-                    break;
-                case Age.Adult:
-                    if (health == Health.Rotted)
-                    {
-                        maxHealth = true;
-                    }
-                    break;
-                case Age.Ancient:
-                    if (health == Health.Dying)
-                    {
-                        maxHealth = true;
-                    }
-                    break;
-                default:
-                    break;
-            }
+                health -= 1;
+                survivance = 0;
+            } 
+            else
+                survivance -= 1;
+        }
+        switch (age)
+        {
+            case Age.Young:
+                if (health == Health.Good)
+                    healthState = 1;
+                else if (health == Health.Bad)
+                    healthState = -1;
+                else
+                    healthState = 0;
+                break;
+            case Age.Adult:
+                if (health == Health.Excellent)
+                    healthState = 1;
+                else if (health == Health.Rotted)
+                    healthState = -1;
+                else
+                    healthState = 0;
+                break;
+            case Age.Ancient:
+                if (health == Health.Perfect)
+                    healthState = 1;
+                else if (health == Health.Dying)
+                    healthState = -1;
+                else
+                    healthState = 0;
+                break;
+            default:
+                Debug.Log("CheckHealth() : Error in Flower Age");
+                break;
         }
     }
 
     // Check if the Flower is still alive
     private void Survive()
     {
-        if (res <= randDice(10))
+        if (survivance >= 3)
         {
-            Debug.Log("The Flower is still alive");
-            //Flower is alive
+            Evolve();
+            survivance = 0;
         }
-        else
-        {
-            Debug.Log("The Flower did not make it");
-            //Flower is dead
-        }
+        else if (survivance <= -3)
+            Debug.Log("Game Over : The Flower is dead");
     }
 
     // Roll a dice and return the result
@@ -312,7 +321,7 @@ public class Flower : MonoBehaviour
         Debug.Log(rand + "/" + dice);
         return rand;
     }
-
+    
     // Properties
     public int baseMeat { get { return _baseMeat; } set { _baseMeat = value; } } 
     public int baseSun { get { return _baseSun; } set { _baseSun = value; } }
