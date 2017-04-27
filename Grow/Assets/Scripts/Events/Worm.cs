@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using GlobalMethods;
 
 public class Worm : Event
 {
@@ -21,6 +20,6 @@ public class Worm : Event
     public override void OnNewDay()
     {
         base.OnNewDay();
-
+        int i = ;
     }
 }

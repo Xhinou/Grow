@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GlobalMethods;
 
 public class Flower : MonoBehaviour
 {
@@ -319,11 +320,7 @@ public class Flower : MonoBehaviour
     // Roll a dice and return the result
     private int randDice(int dice)
     {
-        int rand = Random.Range(0, dice) + 1;
-        if (rand > dice)
-            rand = dice;
-        Debug.Log(rand + "/" + dice);
-        return rand;
+        return GameMethods.randDice(dice);
     }
     
     // Properties
