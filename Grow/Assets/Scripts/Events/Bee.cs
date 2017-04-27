@@ -17,4 +17,9 @@ public class Bee : Event
         //Destroy(gameObject);
         print("Bee destroyed");
     }
+
+    public override void OnNewDay()
+    {
+        base.OnNewDay();
+    }
 }

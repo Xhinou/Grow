@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Sun : Event
 {
-    private int incGiven;
+    private int _incGiven;
 
     new void Start()
     {
@@ -19,6 +19,11 @@ public class Sun : Event
         //StartCoroutine(system.Timer(gameObject, 5));
     }
 
+    public override void OnNewDay()
+    {
+        base.OnNewDay();
+    }
+
     private void Sweat()
     {
         incGiven += 1;
@@ -28,4 +33,6 @@ public class Sun : Event
             incGiven = 0;
         }
     }
+
+    public int incGiven { get { return _incGiven; } set { _incGiven = value; } }
 }

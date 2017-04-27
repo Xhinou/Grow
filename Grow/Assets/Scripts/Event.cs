@@ -17,6 +17,11 @@ public class Event : MonoBehaviour
 
     protected void OnMouseEnter()
     {
-        Debug.Log("Interaction : " + gameObject.name);
+
+    }
+
+    public virtual void OnNewDay()
+    {
+        print(gameObject.name);
     }
 }

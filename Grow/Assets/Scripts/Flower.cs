@@ -160,12 +160,14 @@ public class Flower : MonoBehaviour
         // Check the given Water
         if (givenWater == baseWater)
         {
+            muchWater = 0;
             res += 1;
             if (dry)
                 dry = false;
         }
         else if (givenWater < baseWater)
         {
+            muchWater = 0;
             res -= 1;
             if (!dry)
                 incDry += 1;
@@ -249,7 +251,6 @@ public class Flower : MonoBehaviour
     {
         if (res >= randDice(10))
         {
-            print("wut");
             if (healthState != 1)
             {
                 health += 1;
@@ -309,7 +310,10 @@ public class Flower : MonoBehaviour
             survivance = 0;
         }
         else if (survivance <= -3)
+        {
+            dead = true;
             Debug.Log("Game Over : The Flower is dead");
+        }
     }
 
     // Roll a dice and return the result

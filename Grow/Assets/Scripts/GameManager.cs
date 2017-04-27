@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    private Event[] events;
+
     private Flower flower;
-    [SerializeField] private int
+    private Sun sun;
+
+    [SerializeField]
+    private int
         day,
         life,
         population;
 
     private void Start()
     {
+        events = new Event[3];
+        events = FindObjectsOfType<Event>();
         flower = GameObject.Find("Flower").GetComponent<Flower>();
+        sun = GameObject.Find("Sun").GetComponent<Sun>();
         day = 1;
         population = 0;
         life = 0;
@@ -23,8 +32,8 @@ public class GameManager : MonoBehaviour
     public void NextDay()
     {
         day += 1;
-        //Play Day change Animation
         flower.flowerMaths();
+        //Play Day change Animation
         SetNewDay();
     }
 
@@ -48,14 +57,27 @@ public class GameManager : MonoBehaviour
             population = 0;
         }
     }
-    
+
+    // Change values for the new day
     private void SetNewDay()
     {
+        foreach (Event e in events)
+            e.OnNewDay();
         flower.res = flower.baseRes;
         flower.givenSun = 0;
         flower.givenWater = flower.muchWater;
         if (!flower.vegan)
             flower.givenMeat = 0;
+        sun.incGiven = 0;
+    }
+
+    public int randDice(int dice)
+    {
+        int rand = Random.Range(0, dice) + 1;
+        if (rand > dice)
+            rand = dice;
+        Debug.Log(rand + "/" + dice);
+        return rand;
     }
 
     //Properties

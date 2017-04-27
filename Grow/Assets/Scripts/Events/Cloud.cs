@@ -15,4 +15,9 @@ public class Cloud : Event
         flower.Feed(Flower.Need.Water, +1);
         //StartCoroutine(system.Timer(gameObject, 5));
     }
+
+    public override void OnNewDay()
+    {
+        base.OnNewDay();
+    }
 }
