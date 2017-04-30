@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Bee : Event
 {
-
     new void Start()
     {
         base.Start();
@@ -12,7 +11,7 @@ public class Bee : Event
 
     private void OnMouseDown()
     {
-        system.Populate();
+        controller.Populate();
         //Play Bee Animation
         //Destroy(gameObject);
         print("Bee destroyed");

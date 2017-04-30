@@ -1,28 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GlobalMethods;
 
-public class Event : MonoBehaviour
+public class Event : GameManager
 {
-    protected GameManager system;
+    public Event[] myEvents;
+    public GameObject[] eventsObjects;
+
+    protected Controller controller;
     protected Flower flower;
 
-    private float delay;
+    private void Awake()
+    {
+            myEvents = eventsObjects.FindObjectsOfType<Event>();
+    }
 
     protected void Start()
     {
-        system = GameObject.Find("System").GetComponent<GameManager>();
+        controller = GameObject.Find("System").GetComponent<Controller>();
         flower = GameObject.Find("Flower").GetComponent<Flower>();
     }
 
     protected void OnMouseEnter()
     {
-
     }
 
     public virtual void OnNewDay()
     {
         print(gameObject.name);
+    }
+
+    private void PopWorm()
+    {
+        if (randDice(16) == 16 - ((int)flower.age * 2))
+        {
+            // Create a worm
+            Worm worm = FindObjectOfType<Worm>();
+            Instantiate(worm);
+        }
+    }
+
+    private void UpdateEvents()
+    {
+        Awake();
     }
 }

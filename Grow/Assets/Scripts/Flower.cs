@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GlobalMethods;
 
-public class Flower : MonoBehaviour
+public class Flower : GameManager
 {
     // Enums
-    private enum Age { Young, Adult, Ancient };
-    [SerializeField] private Age age;
+    public enum Age { Young, Adult, Ancient };
+    public Age age;
 
     private enum Health { Dying = -3, Rotted = -2, Bad = -1, Neutral = 0, Good = 1, Excellent = 2, Perfect = 3 };
     [SerializeField] private Health health;
@@ -31,6 +30,7 @@ public class Flower : MonoBehaviour
         _dead,
         _drunk,
         _dry,
+        _infested,
         _shiny,
         _vegan;
 
@@ -316,12 +316,6 @@ public class Flower : MonoBehaviour
             Debug.Log("Game Over : The Flower is dead");
         }
     }
-
-    // Roll a dice and return the result
-    private int randDice(int dice)
-    {
-        return GameMethods.randDice(dice);
-    }
     
     // Properties
     public int baseMeat { get { return _baseMeat; } set { _baseMeat = value; } } 
@@ -335,6 +329,7 @@ public class Flower : MonoBehaviour
     public bool dead { get { return _dead; } set { _dead = value; } }
     public bool drunk { get { return _drunk; } set { _drunk = value; } }
     public bool dry { get { return _dry; } set { _dry = value; } }
+    public bool infested { get { return _infested; } set { _infested = value; } }
     public bool shiny { get { return _shiny; } set { _shiny = value; } }
     public bool vegan { get { return _vegan; } set { _vegan = value; } }
     public int givenMeat { get { return _givenMeat; } set { _givenMeat = value; } }
