@@ -24,7 +24,6 @@ public class Worm : Event
 
     public override void OnNewDay()
     {
-        base.OnNewDay();
         if (deadDays > 0)
             deadDays -= 1;
         if (isAlive)

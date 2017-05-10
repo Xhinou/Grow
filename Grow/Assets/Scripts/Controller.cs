@@ -5,7 +5,6 @@ using UnityEngine;
 public class Controller : GameManager
 {
     private Flower flower;
-    private Event eventScript;
     private Sun sun;
 
     [SerializeField]
@@ -17,7 +16,6 @@ public class Controller : GameManager
     private void Start()
     {
         flower = GameObject.Find("Flower").GetComponent<Flower>();
-        eventScript = FindObjectOfType<Event>();
         sun = GameObject.Find("Sun").GetComponent<Sun>();
         day = 1;
         population = 0;
@@ -58,7 +56,8 @@ public class Controller : GameManager
     // Change values for the new day
     private void SetNewDay()
     {
-        foreach (Event e in eventScript.myEvents)
+        Event[] myEvents = FindObjectsOfType<Event>();
+        foreach (Event e in myEvents)
             e.OnNewDay();
         flower.res = flower.baseRes;
         flower.givenSun = 0;

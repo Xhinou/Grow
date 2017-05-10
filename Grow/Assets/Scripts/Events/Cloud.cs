@@ -18,6 +18,6 @@ public class Cloud : Event
 
     public override void OnNewDay()
     {
-        base.OnNewDay();
+        
     }
 }

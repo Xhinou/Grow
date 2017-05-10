@@ -19,6 +19,6 @@ public class Bee : Event
 
     public override void OnNewDay()
     {
-        base.OnNewDay();
+
     }
 }

@@ -21,7 +21,7 @@ public class Sun : Event
 
     public override void OnNewDay()
     {
-        base.OnNewDay();
+        
     }
 
     private void Sweat()
