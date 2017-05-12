@@ -5,7 +5,7 @@ using UnityEngine;
 public class Cloud : Event
 {
 
-    new void Start()
+    private new void Start()
     {
         base.Start();
     }

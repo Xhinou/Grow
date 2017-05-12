@@ -26,12 +26,13 @@ public class Flower : GameManager
         _baseRes;
 
     [SerializeField] private bool
-        _dirty,
-        _dead,
-        _drunk,
-        _dry,
-        _infested,
-        _shiny,
+        _dirty = false,
+        _dead = false,
+        _drunk = false,
+        _dry = false,
+        _infested = false,
+        _poisoned = false,
+        _shiny = false,
         _vegan;
 
     // Givens
@@ -49,7 +50,7 @@ public class Flower : GameManager
         incShiny = 0,
         decDrunk,
         _newRes,
-        _muchWater,
+        _muchWater = 0,
         healthState = 0, // Health states : -1 = Minimal; 0 = Neutral; 1 = Maximal (health)
         survivance = 0; // Day passed in a non-zero health state : -3 = Death; 3 = Evolve;
 
@@ -330,6 +331,7 @@ public class Flower : GameManager
     public bool drunk { get { return _drunk; } set { _drunk = value; } }
     public bool dry { get { return _dry; } set { _dry = value; } }
     public bool infested { get { return _infested; } set { _infested = value; } }
+    public bool poisoned { get { return _poisoned; } set { _poisoned = value; } }
     public bool shiny { get { return _shiny; } set { _shiny = value; } }
     public bool vegan { get { return _vegan; } set { _vegan = value; } }
     public int givenMeat { get { return _givenMeat; } set { _givenMeat = value; } }

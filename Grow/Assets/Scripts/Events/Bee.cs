@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bee : Event
 {
-    new void Start()
+    private new void Start()
     {
         base.Start();
     }

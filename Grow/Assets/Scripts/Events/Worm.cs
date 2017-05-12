@@ -2,12 +2,10 @@
 
 public class Worm : Event
 {
-    public static bool recentDeath;
 
-    private bool isAlive = false;
-    private int deadDays = 0;
+    private bool isAlive;
 
-    new void Start()
+    private new void Start()
     {
         base.Start();
         isAlive = true;
@@ -24,13 +22,9 @@ public class Worm : Event
 
     public override void OnNewDay()
     {
-        if (deadDays > 0)
-            deadDays -= 1;
         if (isAlive)
         {
             flower.infested = true;
-            deadDays = 5 - (int)flower.age;
-            recentDeath = true;
             isAlive = false;
             Destroy(gameObject);
         }

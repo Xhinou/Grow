@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class Controller : GameManager
 {
+    private EventsLoader eventsLoader;
     private Flower flower;
     private Sun sun;
 
-    [SerializeField]
-    private int
+    public int
         day,
-        life,
-        population;
+        population,
+        extraLife;
 
     private void Start()
     {
-        flower = GameObject.Find("Flower").GetComponent<Flower>();
-        sun = GameObject.Find("Sun").GetComponent<Sun>();
+        eventsLoader = gameObject.GetComponent<EventsLoader>();
+        flower = GameObject.FindWithTag("Flower").GetComponent<Flower>();
+        sun = eventsLoader.sun.GetComponent<Sun>();
         day = 1;
         population = 0;
-        life = 0;
+        extraLife = 0;
         flower.res = flower.baseRes;
     }
 
@@ -48,7 +49,7 @@ public class Controller : GameManager
         population += 1;
         if (population >= 10)
         {
-            life += 1;
+            extraLife += 1;
             population = 0;
         }
     }
@@ -59,12 +60,25 @@ public class Controller : GameManager
         Event[] myEvents = FindObjectsOfType<Event>();
         foreach (Event e in myEvents)
             e.OnNewDay();
+        InstantiateNewEvents();
         flower.res = flower.baseRes;
         flower.givenSun = 0;
         flower.givenWater = flower.muchWater;
         if (!flower.vegan)
             flower.givenMeat = 0;
         sun.incGiven = 0;
+    }
+
+    private void InstantiateNewEvents()
+    {
+        if (randDice(16) >= 16 - ((int)flower.age * 2))
+        {
+            eventsLoader.LoadEvent(eventsLoader.worm);
+        }
+        if (randDice(25) == 25)
+        {
+            eventsLoader.LoadEvent(eventsLoader.bee);
+        }
     }
 
     //Properties

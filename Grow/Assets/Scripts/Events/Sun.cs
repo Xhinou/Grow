@@ -6,7 +6,7 @@ public class Sun : Event
 {
     private int _incGiven;
 
-    new void Start()
+    private new void Start()
     {
         base.Start();
         incGiven = 0;

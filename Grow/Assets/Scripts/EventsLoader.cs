@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EventsLoader : GameManager
 {
@@ -10,9 +8,10 @@ public class EventsLoader : GameManager
         bee,
         worm;
 
-	private void Start ()
+    public void LoadEvent(GameObject prefab)
     {
-
-	}
+        Event prefabScript = prefab.GetComponent<Event>();
+        Instantiate(prefab, prefabScript.spawn, Quaternion.identity);
+    }
 }
 
