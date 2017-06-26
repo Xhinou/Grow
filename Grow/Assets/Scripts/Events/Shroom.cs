@@ -16,7 +16,7 @@ public class Shroom : Event
 
     public override void OnNewDay()
     {
-        base.OnNewDay();
+        Destroy(gameObject);
     }
 
     private void Poison()
