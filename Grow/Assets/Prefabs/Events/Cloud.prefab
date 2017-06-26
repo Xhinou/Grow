@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4157242749482196}
   - component: {fileID: 212028376645552792}
-  - component: {fileID: 61495812060650166}
   - component: {fileID: 114475986737333578}
+  - component: {fileID: 60822612049265316}
   m_Layer: 0
   m_Name: Cloud
   m_TagString: Untagged
@@ -35,15 +35,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1027447726765272}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.07, y: 2.61, z: 0}
-  m_LocalScale: {x: 21.216875, y: 13.9126835, z: 13.9126835}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61495812060650166
-BoxCollider2D:
+--- !u!60 &60822612049265316
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -53,9 +53,29 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.15999998}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4, y: 4}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.7699852, y: -1.0065937}
+      - {x: 1.3916273, y: -0.8684606}
+      - {x: 2.026517, y: -0.23232514}
+      - {x: 2.0410795, y: 0.36969674}
+      - {x: 0.89202976, y: 1.1652131}
+      - {x: -0.113396645, y: 1.1725702}
+      - {x: -1.3608131, y: 0.92387104}
+      - {x: -2.0108175, y: 0.31490827}
+      - {x: -2.021635, y: -0.3509643}
+      - {x: -1.3233194, y: -1.0120203}
 --- !u!114 &114475986737333578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -98,8 +118,13 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_SortingLayer: 0
+  m_SortingOrder: -2
+  m_Sprite: {fileID: 21300000, guid: b6768c78f14a14945ac53a7b6a36b15c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0

@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4160781473687100}
-  - component: {fileID: 114405099020321318}
   - component: {fileID: 114101234931441868}
   - component: {fileID: 114119067119184178}
   m_Layer: 0
@@ -67,19 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d9a4c31a0f1f044bb21690a399035f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flower: {fileID: 1500388374805278, guid: b19b3259b87cc924b943f37a4f2e923a, type: 2}
   sun: {fileID: 1128904066938430, guid: ba6b9a4df9ae49849ba9c3c617337c85, type: 2}
   cloud: {fileID: 1027447726765272, guid: bfaae8077b6c1e149bbba570cd1971b6, type: 2}
   bee: {fileID: 1042623956667226, guid: b72f1e2bfbfc7c143b8defb25f566407, type: 2}
   worm: {fileID: 1767213853883604, guid: 55238e98b0eeea64b95ebf79d5d54c4c, type: 2}
---- !u!114 &114405099020321318
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1130996056891774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37a6bf5516af3194080fe5815d163b25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
