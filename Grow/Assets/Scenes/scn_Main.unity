@@ -147,6 +147,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114875574602087348, guid: ba6b9a4df9ae49849ba9c3c617337c85,
+        type: 2}
+      propertyPath: spawn.x
+      value: 6.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 114875574602087348, guid: ba6b9a4df9ae49849ba9c3c617337c85,
+        type: 2}
+      propertyPath: spawn.y
+      value: 2.54
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba6b9a4df9ae49849ba9c3c617337c85, type: 2}
   m_IsPrefabParent: 0
@@ -675,35 +685,6 @@ Transform:
   m_Father: {fileID: 1397667629}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1013729609
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1013729610}
-  m_Layer: 0
-  m_Name: CloudFloating
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1013729610
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1013729609}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1741324986}
-  m_Father: {fileID: 2086717901}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1282257848
 Prefab:
   m_ObjectHideFlags: 0
@@ -932,11 +913,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 212205852923515826, guid: 8a36518b62c19fb4cbc8219e79cafb1e,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: -1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a36518b62c19fb4cbc8219e79cafb1e, type: 2}
   m_IsPrefabParent: 0
@@ -1083,7 +1059,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1013729610}
+    m_TransformParent: {fileID: 2086717901}
     m_Modifications:
     - target: {fileID: 4157242749482196, guid: bfaae8077b6c1e149bbba570cd1971b6, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1116,6 +1092,16 @@ Prefab:
     - target: {fileID: 4157242749482196, guid: bfaae8077b6c1e149bbba570cd1971b6, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114475986737333578, guid: bfaae8077b6c1e149bbba570cd1971b6,
+        type: 2}
+      propertyPath: spawn.x
+      value: -4.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 114475986737333578, guid: bfaae8077b6c1e149bbba570cd1971b6,
+        type: 2}
+      propertyPath: spawn.y
+      value: 1.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bfaae8077b6c1e149bbba570cd1971b6, type: 2}
@@ -1272,7 +1258,7 @@ GameObject:
   - component: {fileID: 2086717901}
   - component: {fileID: 2086717900}
   m_Layer: 0
-  m_Name: CloudAnimator
+  m_Name: CloudFloating
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1302,10 +1288,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2086717899}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11, y: 1.23, z: 0}
+  m_LocalPosition: {x: -4.85, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1013729610}
+  - {fileID: 1741324986}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
