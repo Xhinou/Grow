@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flower : GameManager
+public class Flower : Grow
 {
     // Enums
     public enum Age { Young, Adult, Ancient };
@@ -124,6 +124,7 @@ public class Flower : GameManager
         if (!vegan)
             baseMeat += 1;
         age += 1;
+        health = 0;
     }
 
     // Called to feed the Flower

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EventsLoader : GameManager
+public class EventsLoader : Grow
 {
     public GameObject
         sun,

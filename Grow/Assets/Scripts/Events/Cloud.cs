@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Cloud : Event
+﻿public class Cloud : Event
 {
 
     private new void Start()

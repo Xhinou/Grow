@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
 
-[CustomEditor(typeof(Controller))]
+[CustomEditor(typeof(GameManager))]
 public class ControllerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        Controller myTarget = (Controller)target;
+        GameManager myTarget = (GameManager)target;
         
         EditorGUILayout.LabelField("Day", myTarget.day.ToString());
 

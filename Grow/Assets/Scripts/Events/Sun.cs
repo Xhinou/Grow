@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Sun : Event
+﻿public class Sun : Event
 {
     private int _incGiven;
 
@@ -21,7 +17,7 @@ public class Sun : Event
 
     public override void OnNewDay()
     {
-        
+        incGiven = 0;
     }
 
     private void Sweat()

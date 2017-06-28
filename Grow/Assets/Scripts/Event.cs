@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Event : GameManager
+public class Event : Grow
 {
-    protected Controller controller;
+    protected GameManager gameManager;
     protected Flower flower;
 
     public Vector2 spawn;
     
     protected void Start()
     {
-        controller = FindObjectOfType<Controller>();
+        gameManager = FindObjectOfType<GameManager>();
         flower = FindObjectOfType<Flower>();
     }
 

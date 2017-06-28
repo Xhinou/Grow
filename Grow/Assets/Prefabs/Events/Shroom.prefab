@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4089934507838000}
   - component: {fileID: 212205852923515826}
   - component: {fileID: 61033977073381710}
-  - component: {fileID: 114777116906625470}
+  - component: {fileID: 114212175514530278}
   m_Layer: 0
   m_Name: Shroom
   m_TagString: Untagged
@@ -53,10 +53,21 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.16}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
---- !u!114 &114777116906625470
+  m_EdgeRadius: 0
+--- !u!114 &114212175514530278
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -64,10 +75,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1311004200058662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82bb3ca99d8df8144beca7563a9b3356, type: 3}
+  m_Script: {fileID: 11500000, guid: 3262269f699c57c4f8ec93c92305b604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawn: {x: -5.11, y: -3.41}
+  spawn: {x: 0, y: 0}
 --- !u!212 &212205852923515826
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -98,8 +109,13 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0, g: 0.7647059, b: 0.22677484, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0

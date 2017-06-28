@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Bee : Event
+﻿public class Bee : Event
 {
     private new void Start()
     {
@@ -11,7 +7,7 @@ public class Bee : Event
 
     private void OnMouseDown()
     {
-        controller.Populate();
+        gameManager.Populate();
         //Play Bee Animation
         //Destroy(gameObject);
         print("Bee destroyed");
